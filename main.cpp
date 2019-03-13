@@ -17,17 +17,14 @@
 
 #include <iostream>
 #include <ctype.h>
+// #include<conio.h> auf dem mac nicht funktional... getc(); wird durch cin ersetzt
 
-
-
+// defenition des namespace
 using namespace std;
 
-
-
-/**
- @ingroup
- @const
- @brief    Gibt die maximale Größe des eingelesen Strings an.
+//! structur daten
+/*!
+ Struktur für alle Mengen und Preis angaben
  */
 struct daten {
     int vorrat_kaffee;// g
@@ -61,6 +58,7 @@ void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso
 
 
 int main()
+//declaring valuse for daten k
 {   daten k;
     k.vorrat_kaffee                     = 1000;
     k.vorrat_espresso                   = 1000;
@@ -93,11 +91,13 @@ int main()
 
     
     
-    
+    //start der dauerschleife....an dieser stelle besser while(true);
     for (;;)
     {
         aktueller_preis = 0.0f;
+        //springen ins Hauptmenue
         UI(pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, k);
+        //abfrage des service modes
         if (bservice == true) {
             system("cls");
             cout << "Bitte geben Sie das Passwort ein:";
@@ -107,7 +107,6 @@ int main()
                 cout << "*";
             }
             temp = true;
-            
             for (i = 0; i < 6; ++i)
             {
                 if (eingabe[i] != passwort[i])
@@ -121,11 +120,12 @@ int main()
                 system("pause");
                 continue;
             }
-            
+            //wenn passwort korekt springen in servicemodus funktion
             else if (temp == true) {
                 SI(k);
             }
         };
+        // ermittel und ausgeben des Preises
         aktueller_preis = preis_berechnen(bkaffee, bmilch, bzucker, bespresso, k);
         cout << "\nBitte " << aktueller_preis << "Euro eingeben und ENTER druecken:";
         float eingabe;
@@ -134,6 +134,7 @@ int main()
         rueckgeld = eingabe - aktueller_preis;
         if (rueckgeld >= 0.0f)
         {
+            //verbleibenden lagerstand aktualisieren
             mengen_aktualisieren(bkaffee, bmilch, bzucker,bespresso, &k);
             if (rueckgeld > 0.0f)
                 cout << "\nBitte " << rueckgeld << " Euro Rueckgeld und ";
@@ -148,12 +149,12 @@ int main()
     return 0;
 }
 
-void gotoxy(int x, int y) {
-    printf("\x1b[%d;%df", y, x);
-}
-
-
-
+// @UI
+/* @b Description:
+ Zeigt das Hauptmenue an.
+ */
+//@param *bool daten
+//@return bool
 bool UI(bool *pbkaffee, bool *pbmilch, bool *pbzucker, bool *pbespresso, bool *pbservice, daten kaffee)
 {
     system("cls");
@@ -180,7 +181,8 @@ bool UI(bool *pbkaffee, bool *pbmilch, bool *pbzucker, bool *pbespresso, bool *p
             UI_zusaetze_kaffee(false, pbmilch, pbzucker);
             break;
         case 's':
-            return true;
+            *pbservice = true;
+            break;
         case '!':
             cout << "\nProgramm beendet sich\n";
             system("pause");
@@ -191,6 +193,12 @@ bool UI(bool *pbkaffee, bool *pbmilch, bool *pbzucker, bool *pbespresso, bool *p
     return false;
             
 }
+// @UI_zusaetze_kaffee
+/* @b Description:
+ Zeigt das menue fuer die auswahl derzusätze an
+ */
+//@param *bool
+//@return void
 void UI_zusaetze_kaffee(bool beide, bool *pbmilch, bool *pbzucker){
     
     char auswahl;
@@ -226,6 +234,13 @@ void UI_zusaetze_kaffee(bool beide, bool *pbmilch, bool *pbzucker){
     }
     
 }
+
+    // @brief SI
+    /* @b Description:
+    Zeigt das servicemenue mit allen fuellstaenden an
+    */
+    //@param daten
+    //@return void
 void SI(daten kaffee){
     system("cls");
     cout << "Service-Interface \n";
@@ -238,12 +253,23 @@ void SI(daten kaffee){
     " g\t\tWasser fuer Espresso:\t" << kaffee.menge_wasser_pro_tasse_espresso << " ml\n";
     cout << "----------------------------------------------------------------\n";
     system("pause");
-    
+    return;
 }
+
+// @preis_berechnen
+/* @b Description:
+ Berechnet den gesamtpreis des zusammengstellten getränks
+ */
+//@param bool daten
+//@return float
 float preis_berechnen(bool bkaffee, bool bmilch, bool bzucker, bool bespresso, daten kaffee){
     float preis {0.00f};
     // Getr‰nkepreis berechnen
     if (bkaffee == true )
+    {
+        preis += kaffee.preis_pro_tasse;
+    }
+    else if (bespresso == true )
     {
         preis += kaffee.preis_pro_tasse;
     }
@@ -258,6 +284,13 @@ float preis_berechnen(bool bkaffee, bool bmilch, bool bzucker, bool bespresso, d
     return  preis;
     
 }
+
+// @mengen_aktualisieren
+/* @b Description:
+ Berechnet die im vorrat verbleibenden menge
+ */
+//@param bool *daten
+//@return void
 void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso, daten *pkaffee){
     
     // Vorratsmengen aktualisieren
@@ -280,6 +313,5 @@ void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso
        pkaffee->vorrat_milch -= pkaffee->menge_milch_pro_tasse;
     }
     cout << "Ihr Getraenk wird zubereitet..... \n";
-    
 }
-                
+    
