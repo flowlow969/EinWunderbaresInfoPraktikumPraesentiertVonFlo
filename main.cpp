@@ -95,10 +95,11 @@ int main()
     for (;;)
     {
         aktueller_preis = 0.0f;
+         bkaffee = bespresso = bzucker = bmilch = bservice = false;
         //springen ins Hauptmenue
         UI(pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, k);
         //abfrage des service modes
-        if (bservice == true) {
+        if (bservice !=false) {
             system("cls");
             cout << "Bitte geben Sie das Passwort ein:";
             for (i = 0; i < 6; ++i)
@@ -123,10 +124,13 @@ int main()
             //wenn passwort korekt springen in servicemodus funktion
             else if (temp == true) {
                 SI(k);
+                temp = false;
             }
-        };
+        }
         // ermittel und ausgeben des Preises
         aktueller_preis = preis_berechnen(bkaffee, bmilch, bzucker, bespresso, k);
+    if (aktueller_preis != 0.00f) {
+      
         cout << "\nBitte " << aktueller_preis << "Euro eingeben und ENTER druecken:";
         float eingabe;
         float rueckgeld;
@@ -145,6 +149,7 @@ int main()
             cout << "\nZu wenig Geld, Bestellung abgebrochen\n";
             system("pause");
         }
+    }
     }
     return 0;
 }
@@ -314,4 +319,3 @@ void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso
     }
     cout << "Ihr Getraenk wird zubereitet..... \n";
 }
-    
