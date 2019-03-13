@@ -12,4 +12,7 @@ Ausführen:
 -Mit Hilfe des Befehls „gcc -Wall main.cpp -o rsa“ das Programm kompilieren.
 -Programm ausführen.
 
-Bei fragen und Korektur vorschlägen: ufh969@gmail.com,
+Bei fragen und Korektur vorschlägen: ufh969@gmail.com
+
+
+Zukünftige verbesserung realisierung durch zustandsmaschine und gui
