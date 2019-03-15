@@ -97,7 +97,10 @@ int main()
         aktueller_preis = 0.0f;
          bkaffee = bespresso = bzucker = bmilch = bservice = false;
         //springen ins Hauptmenue
-        UI(pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, k);
+        bool shutdown = UI(pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, k);
+        if (shutdown == true)
+            return 0;
+        
         //abfrage des service modes
         if (bservice !=false) {
             system("cls");
@@ -319,3 +322,5 @@ void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso
     }
     cout << "Ihr Getraenk wird zubereitet..... \n";
 }
+                    
+                    
