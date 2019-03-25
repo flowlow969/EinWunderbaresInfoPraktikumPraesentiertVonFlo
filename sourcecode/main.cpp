@@ -20,11 +20,11 @@
 #include "funktionen.hpp"
 // #include<conio.h> auf dem mac nicht funktional... getc(); wird durch cin ersetzt
 // Definition für Debug modus
-#define debug
+//#define debug // #steht für eine preprozesor direktive d.h das nur der pre prozesor diese anweisung liest
 // defenition des namespace
 using namespace std;
 
-bool debugbool{0};
+bool debugbool{0}; //mit der variante über bool kann der test modus jetzt auch wärend der laufzeit aktiviert werden
 
 //! structur daten
 /*!
@@ -98,6 +98,12 @@ int main()
         cout << "pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, shutdown" << endl;
         cout << bkaffee << bmilch << bzucker << bespresso << bservice << shutdown << endl;
 #endif
+        
+        if (debugbool == true){
+            cout << "stati der zustandswerte" << endl;
+            cout << "pbkaffee, pbmilch, pbzucker, pbespresso, pbservice, shutdown" << endl;
+            cout << bkaffee << bmilch << bzucker << bespresso << bservice << shutdown << endl;
+        }
         if (shutdown == true)
             return 0;
         

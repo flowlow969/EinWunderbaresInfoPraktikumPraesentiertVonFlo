@@ -36,13 +36,9 @@ struct daten {
 
 
 /* Function prototypes -------------------------------------------------------*/
-
-
 bool UI(bool *pbkaffee, bool *pbmilch, bool *pbzucker, bool *pbespresso, bool *pbservice, daten kaffee);
 void UI_zusaetze_kaffee(bool beide, bool *pbmilch, bool *pbzucker);
 void SI(daten kaffee);
 float preis_berechnen(bool bkaffee, bool bmilch, bool bzucker, bool bespresso, daten kaffee);
 void mengen_aktualisieren(bool bkaffee, bool bmilch, bool bzucker,bool bespresso, daten *pkaffee);
-
-
 /*****END OF FILE****/
