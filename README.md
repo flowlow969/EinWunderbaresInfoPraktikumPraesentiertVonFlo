@@ -5,7 +5,7 @@
 *
 *H*/
 
-In diesem Ordner finden sie ein Programm das die Funktionsweisen eines Kaffeeautomats simuliert
+In diesem Ordner finden sie ein Programm das bis zu 10 daten einlesen kann und aus diesen bestimmen kann ob diese in einem schaltjahr liegen und den tag des jahres berechnen.
 
 Ausführen:
 -Terminal öffnen.
@@ -15,4 +15,4 @@ Ausführen:
 Bei fragen und Korektur vorschlägen: ufh969@gmail.com
 
 
-Zukünftige verbesserung realisierung durch zustandsmaschine und gui
+
